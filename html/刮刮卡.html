@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #ggk {
+            width: 400px;
+            height: 100px;
+            position: relative;
+        }
+        #ggk .jp {
+            width: 400px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-align: center;
+            color: darkred;
+            font-size: 30px;
+            line-height: 100px;
+        }
+        #ggk #canvas {
+            width: 400px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="ggk">
+        <div class="jp">谢谢惠顾</div>
+        <canvas id="canvas" width="400" height="100"></canvas>
+    </div>
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ggkDom = document.querySelector('#ggk')
+        var ctx = canvas.getContext('2d')
+        ctx.fillStyle = 'darkgray'
+        ctx.fillRect(0, 0, 400, 100)
+        ctx.font = '20px 微软雅黑'
+        ctx.fillStyle = 'red'
+        ctx.fillText('刮刮卡', 180, 50)
+        var isDraw = false
+        canvas.onmousedown = function () {
+            isDraw = true
+        }
+        canvas.onmousemove = function (e) {
+            if (isDraw) {
+                var x = e.pageX - ggkDom.offsetLeft
+                var y = e.pageY - ggkDom.offsetTop
+                ctx.globalCompositeOperation = 'destination-out'
+                ctx.arc(x, y, 20, 0, 2*Math.PI)
+                ctx.fill()
+            }
+        }
+        canvas.onmouseup = function () {
+            isDraw = false
+        }
+    </script>
+</body>
+</html>

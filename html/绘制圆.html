@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" height="600" width="600"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        //前两个参数为圆点，第三个参数为半径，第四个参数为起始角（以弧度计。（弧的圆形的三点钟位置是 0 度）），
+        // 第五个参数为结束角，第六个参数默认false顺时针，true逆时针
+        ctx.arc(100, 100, 100, 0, 2*Math.PI, true);
+        ctx.fillStyle = 'aqua'
+        ctx.fill()
+        ctx.stroke();
+    </script>
+</body>
+</html>

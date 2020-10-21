@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.translate(200, 200)
+        var x      = 10;
+        var y      = 10;
+        var width  = 100;
+        var height = 100
+        var cx     = x + 0.5 * width;   // x of shape center
+        var cy     = y + 0.5 * height;  // y of shape center
+
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(x, y, width, height);  //draw normal shape
+
+        ctx.translate(cx, cy);              //translate to center of shape
+        ctx.rotate( (Math.PI / 180) * 45);  //rotate 25 degrees.
+        ctx.translate(-cx, -cy);            //translate center back to 0,0
+
+        ctx.fillStyle = "#0000ff";
+        ctx.fillRect(x, y, width, height);
+        ctx.stroke()
+    </script>
+</body>
+</html>

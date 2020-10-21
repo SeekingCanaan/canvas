@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+
+        function renderClock() {
+            ctx.clearRect(0, 0, 800, 600)
+            ctx.save()
+            //将坐标移动到画布的中央
+            ctx.translate(400, 300)
+            ctx.rotate(-2*Math.PI/4)
+            ctx.save()
+            //绘制表盘
+            ctx.beginPath()
+            ctx.arc(0, 0, 200, 0, 2*Math.PI)
+            ctx.strokeStyle = 'darkgrey'
+            ctx.lineWidth = 10
+            ctx.stroke()
+            ctx.closePath()
+
+            //绘制秒针、秒针刻度
+            for (let i = 0; i < 60; i++) {
+                ctx.rotate(Math.PI/30)
+                ctx.beginPath()
+                ctx.moveTo(186, 0)
+                ctx.lineTo(195, 0)
+                ctx.lineWidth = 5
+                ctx.strokeStyle = '#FFDEAD'
+                ctx.stroke()
+                ctx.closePath()
+            }
+            ctx.restore()
+            ctx.save()
+
+            //绘制时钟刻度
+            for (let i = 0; i < 12; i++) {
+                ctx.rotate(Math.PI/6)
+                ctx.beginPath()
+                ctx.moveTo(180, 0)
+                ctx.lineTo(200, 0)
+                ctx.lineWidth = 10
+                ctx.strokeStyle = 'darkgrey'
+                ctx.stroke()
+                ctx.closePath()
+            }
+            ctx.restore()
+            ctx.save()
+
+            var time = new Date()
+            var hour = time.getHours()
+            var min = time.getMinutes()
+            var sec = time.getSeconds()
+            hour = hour > 12 ? hour - 12 : hour
+            console.log(hour);
+            console.log(sec);
+
+            //绘制秒针
+            ctx.beginPath()
+            ctx.rotate(2*Math.PI/60*sec)
+            ctx.moveTo(0, 0)
+            ctx.lineTo(150, 0)
+            ctx.lineWidth = 2
+            ctx.strokeStyle = '#FF0000'
+            ctx.stroke()
+            ctx.closePath()
+
+            ctx.restore()
+            ctx.save()
+
+            //绘制分针
+            ctx.beginPath()
+            ctx.rotate(2*Math.PI/60*min + 2*Math.PI/3600*sec)
+            ctx.moveTo(0, 0)
+            ctx.lineTo(120, 0)
+            ctx.lineWidth = 5
+            ctx.strokeStyle = '#00FFFF'
+            ctx.stroke()
+            ctx.closePath()
+            ctx.restore()
+            ctx.save()
+
+            //绘制时针
+            ctx.beginPath()
+            ctx.rotate(2*Math.PI/12*hour + 2*Math.PI/60/12*min + 2*Math.PI/12/60/60*sec)
+            ctx.moveTo(0, 0)
+            ctx.lineTo(90, 0)
+            ctx.lineWidth = 10
+            ctx.strokeStyle = '#000000'
+            ctx.stroke()
+            ctx.closePath()
+
+            ctx.beginPath()
+            ctx.arc(0, 0, 7, 0, 2*Math.PI)
+            ctx.fillStyle = '#000000'
+            ctx.fill()
+            ctx.closePath()
+
+            ctx.restore()
+            ctx.restore()
+        }
+        setInterval(function () {
+            renderClock()
+        }, 1000)
+    </script>
+</body>
+</html>

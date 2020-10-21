@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+
+        //绘制图像
+        var img = new Image();
+        img.src = '../imgs/2ea2ff1febe39bd196a6c99a1a2e8a615c7633dc.jpg@518w_1e_1c.jpg'
+        console.log(img.width);
+        console.log(img.height);
+        img.onload = function () {
+            ctx.drawImage(img, 50, 50)
+            ctx.fillText('今晚吃好吃的', 500, 590)
+        }
+    </script>
+</body>
+</html>

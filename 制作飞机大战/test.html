@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas {
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+
+    </canvas>
+    <script>
+        function draw() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillRect(25, 25, 100, 100);
+            ctx.clearRect(45, 45, 60, 60);
+            ctx.strokeRect(50, 50, 50, 50);
+
+            // 通过路径绘制矩形
+            ctx.beginPath()
+            ctx.moveTo(75, 50)
+            ctx.lineTo(100, 75)
+            ctx.lineTo(100, 25)
+            ctx.closePath()
+            ctx.stroke()
+
+        }
+
+    </script>
+</body>
+</html>
